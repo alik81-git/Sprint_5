@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 
 class BasePage:
@@ -12,12 +13,16 @@ class BasePage:
         self.driver.get(self.base_url)
 
     def find_element(self, locator, timeout=10):
-        return self.wait.until(EC.presence_of_element_located(locator),
-                              message=f"Can't find element by locator {locator}")
+        return self.wait.until(
+            EC.presence_of_element_located(locator),
+            message=f"Can't find element by locator {locator}",
+        )
 
     def find_elements(self, locator, timeout=10):
-        return self.wait.until(EC.presence_of_all_elements_located(locator),
-                              message=f"Can't find elements by locator {locator}")
+        return self.wait.until(
+            EC.presence_of_all_elements_located(locator),
+            message=f"Can't find elements by locator {locator}",
+        )
 
     def click(self, locator, timeout=10):
         element = self.find_element(locator, timeout)
@@ -38,3 +43,7 @@ class BasePage:
     def get_text(self, locator, timeout=10):
         element = self.find_element(locator, timeout)
         return element.text
+
+    def get_current_url(self):
+        # Получить текущий URL
+        return self.driver.current_url

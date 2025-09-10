@@ -3,6 +3,9 @@ from locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
+    def __init__(self, driver, wait):
+        super().__init__(driver, wait)
+
     def input_email(self, email):
         self.input_text(LoginPageLocators.EMAIL_INPUT, email)
 

@@ -36,15 +36,32 @@ class AdvertisementPage(BasePage):
 
     def is_advertisement_visible(self):
         return self.is_element_visible(AdvertisementPageLocators.ADVERTISEMENT_ITEM)
-    
-    def set_item_name(self):
-        self.input_text(AdvertisementPageLocators.ITEM_NAME).send_keys('123')
 
-    def create_advertisement(self, title, description, price, category, city, condition):
-        self.input_title(title)
-        self.input_description(description)
-        self.input_price(price)
-        self.select_category(category)
-        self.select_city(city)
-        self.select_condition(condition)
-        self.click_publish_button()
+    def set_item_name(self):
+        self.input_text(AdvertisementPageLocators.ITEM_NAME, "New item Name")
+
+    def set_item_description(self):
+        self.input_text(
+            AdvertisementPageLocators.ITEM_DESCRIPTION, "New item Description"
+        )
+
+    def set_item_price(self):
+        self.input_text(AdvertisementPageLocators.ITEM_PRICE, int(100))
+
+    def set_item_radio_new(self):
+        self.click(AdvertisementPageLocators.ITEM_RADIO_NEW)
+
+    def set_item_radio_used(self):
+        self.click(AdvertisementPageLocators.ITEM_RADIO_USED)
+
+    def set_item_city_dropdown(self):
+        self.click(AdvertisementPageLocators.ITEM_CITY_DROPDOWN)
+
+    def set_item_lastcity(self):
+        self.click(AdvertisementPageLocators.ITEM_LAST_CITY)
+
+    def set_item_category_dropdown(self):
+        self.click(AdvertisementPageLocators.ITEM_CATEGORY_DROPDOWN)
+
+    def set_item_lastcategory(self):
+        self.click(AdvertisementPageLocators.ITEM_LAST_CATEGORY)
