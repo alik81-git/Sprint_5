@@ -14,8 +14,6 @@ class TestCreateAds:
     def test_create_ad_authorized_user(self, driver, wait):
 
         # Выполнить регистрацию нового пользователя
-        # Регистрация нового пользователя необходима, тк после 3х прогонов теста появляется пагинация,
-        # Если использовать зарегистрированного пользователя
         ad_title = TestData.user_data()["title"]
 
         driver.find_element(*MainPage.LOGIN_BTN).click()
@@ -63,7 +61,6 @@ class TestCreateAds:
         driver.find_element(*AdvertisementPageLocators.SUBMIT_BUTTON).click()
 
         # Перейти в профиль пользователя
-        # Используем driver.refresh, тк использование ожиданий не решило проблему с видимостью кнопки профиля
         driver.refresh()
         wait.until(EC.element_to_be_clickable(MainPage.AVATAR_LOGO))
         driver.find_element(*MainPage.AVATAR_LOGO).click()
