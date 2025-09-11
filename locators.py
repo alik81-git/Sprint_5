@@ -1,100 +1,64 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators:
-    ENTRY_BUTTON = (By.XPATH, "//button[contains(text(), 'Вход и регистрация')]")
-    PLACE_AD_BUTTON = (By.XPATH, "//button[contains(text(), 'Разместить объявление')]")
-    PUBLISH_AD_BUTTON = (By.XPATH, "//button[contains(text(), 'Опубликовать')]")
-    GO_PROFILE = (By.XPATH, "//button[@class='circleSmall']")
-    USER_AVATAR = (
-        By.XPATH,
-        "/html/body/div/div/div[1]/div/div[1]/button[@profileText name='User.']",
-    )
-    USER_NAME = (
-        By.XPATH,
-        "html/body/div/div/div[1]/div/div[1]/div/h3[@profileText name='User.']",
-    )
-    LOGOUT_BUTTON = (By.XPATH, "//button[contains(text(), 'Выйти')]")
-    FIND_ITEM_NAME = (By.XPATH, ".//h2[@class='h2']")
+class MainPage:
+    LOGIN_BTN = (By.XPATH, "//button[contains(text(), 'Вход и регистрация')]")
+    AVATAR_LOGO = (By.CLASS_NAME, "circleSmall")
+    USER_NAME = (By.XPATH, "//h3[@class='profileText name']")
+    LOGOUT_BTN = (By.XPATH, "//button[text()='Выйти']")
+    CREATE_AD_BUTTON = (By.XPATH, "//button[text()='Разместить объявление']")
 
 
-class RegistrationPageLocators:
-    NO_ACCOUNT_BUTTON = (By.XPATH, "//button[contains(text(), 'Нет аккаунта')]")
-    EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
-    PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
-    SUBMIT_PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='submitPassword']")
-    CREATE_ACCOUNT_BUTTON = (By.XPATH, "//button[contains(text(), 'Создать аккаунт')]")
-    ERROR_MESSAGE = (By.CSS_SELECTOR, "[data-testid='error-message']")
-    ERROR_FIELD = (By.CSS_SELECTOR, ".error-field")
-    ERROR_EMAIL = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div[5]/form/div[2]/div[1]/div/div[@class='input_inputError__fLUP9']",
-    )
-    ERROR_PASSWORD = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div[5]/form/div[2]/div[2]/div/div[@class='input_inputError__fLUP9']",
-    )
-    ERROR_SUBMIT_PASSWORD = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div[5]/form/div[2]/div[3]/div/div[@class='input_inputError__fLUP9']",
-    )
-    ERROR_TEXT_FIELD = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div[5]/form/div[2]/div[1]/span[@input_span__yWPqB='Ошибка']",
-    )
+class LoginPage:
+    LOGIN_LABEL = (By.XPATH, "//h1[text()='Войти']")
+    EMAIL_INPUT = (By.NAME, "email")
+    PASSWORD_INPUT = (By.NAME, "password")
+    LOGIN_BTN = (By.XPATH, "//button[text()='Войти']")
+    REGISTR_ACC_BTN = (By.XPATH, "//button[text()='Нет аккаунта']")
 
 
-class LoginPageLocators:
-    EMAIL_INPUT = (By.CSS_SELECTOR, "input[name='email']")
-    PASSWORD_INPUT = (By.CSS_SELECTOR, "input[name='password']")
-    LOGIN_BUTTON = (By.XPATH, "//button[contains(text(), 'Войти')]")
+class RegistartionPage:
+    REGISTRATION_LABEL = (By.XPATH, "//h1[text()='Зарегистрироваться']")
+    CONFIRM_PASSWORD_INPUT = (By.NAME, "submitPassword")
+    CREATE_ACC_BTN = (By.XPATH, "//button[text()='Создать аккаунт']")
+    EMAIL_ERROR = (By.XPATH, "//span[@class='input_span__yWPqB' and text()='Ошибка']")
 
 
 class AdvertisementPageLocators:
-    MODAL_TITLE = (
+    TITLE_INPUT = (By.NAME, "name")
+    DESCRIPTION_TEXTAREA = (By.XPATH, "//textarea[@placeholder='Описание товара']")
+    PRICE_INPUT = (By.NAME, "price")
+    CATEGORY_DROPDOWN = (By.CSS_SELECTOR, "input[name='category'] + button")
+    CATEGORY_OPTIONS = (By.XPATH, "//div[@class='dropDownMenu_options__CmHmm']/button")
+    LAST_CATEGORY = (
         By.XPATH,
-        "html/body/div/div/div[2]/div[5]/form/div[1]/h1[text()='Чтобы разместить объявление, авторизуйтесь']",
+        "(//div[@class='dropDownMenu_options__CmHmm']/button)[last()]",
     )
-    ITEM_NAME = (
+    CITY_DROPDOWN = (By.CSS_SELECTOR, "input[name='city'] + button")
+    CITY_OPTIONS = (By.XPATH, "//div[@data-test='city-select-menu']//button")
+    LAST_CITY_OPTION = (
         By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[2]/div[1]/div/div/input",
+        "(//div[@class='dropDownMenu_options__CmHmm']/button)[last()]",
     )
-    ITEM_DESCRIPTION = (
+    CONDITION_RADIOBUTTON_NEW = (
         By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[4]/div/textarea",
+        "//div[@class='radioUnput_inputActive__eC-HY']",
     )
-    ITEM_PRICE = (By.XPATH, "html/body/div/div/div[2]/div/form/div[5]/div/div/input")
-    ITEM_RADIO_NEW = (
+    CONDITION_RADIOBUTTON_USED = (
         By.XPATH,
-        "html/body/div/div/div[2]/div/form/fieldset/div/div[1]/div",
-    )  # новое <div class="radioUnput_inputActive__eC-HY"></div>
-    ITEM_RADIO_USED = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div/form/fieldset/div/div[2]/div",
-    )  # б/у   <div class="radioUnput_inputRegular__FbVbr"></div>
-    ITEM_CITY_DROPDOWN = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[3]/div[1]/button",
+        "//div[@class='radioUnput_inputRegular__FbVbr']",
     )
-    ITEM_LAST_CITY = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[3]/div[2]/button[6]/span",
-    )
-    ITEM_CATEGORY_DROPDOWN = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[2]/div[2]/div[1]/button",
-    )
-    ITEM_LAST_CATEGORY = (
-        By.XPATH,
-        "html/body/div/div/div[2]/div/form/div[2]/div[2]/div[2]/button[5]/span",
-    )
+    SUBMIT_BUTTON = (By.XPATH, "//button[text()='Опубликовать']")
+    AUTH_ERROR = (By.XPATH, "//h1[text()='Чтобы разместить объявление, авторизуйтесь']")
 
-    TITLE_INPUT = (By.CSS_SELECTOR, "input[name='title']")
-    DESCRIPTION_INPUT = (By.CSS_SELECTOR, "textarea[name='description']")
-    PRICE_INPUT = (By.CSS_SELECTOR, "input[name='price']")
-    CATEGORY_DROPDOWN = (By.CSS_SELECTOR, "select[name='category']")
-    CITY_DROPDOWN = (By.CSS_SELECTOR, "select[name='city']")
-    CONDITION_RADIO = (By.CSS_SELECTOR, "input[name='condition']")
-    PUBLISH_BUTTON = (By.XPATH, "//button[contains(text(), 'Опубликовать')]")
-    MY_ADVERTISEMENTS = (By.CSS_SELECTOR, "[data-testid='my-advertisements']")
-    ADVERTISEMENT_ITEM = (By.CSS_SELECTOR, "[data-testid='advertisement-item']")
+
+class ProfilePageLocators:
+    MY_ADS_SECTION = (
+        By.XPATH,
+        "//h1[contains(text(),'Мои объявления')]/following-sibling::div//div[@class='grid_threeColumns__ldn5D']",
+    )
+    AD_TITLE = (By.XPATH, ".//h2[@class='h2']")
+    AD_CARDS = (
+        By.XPATH,
+        "//div[contains(@class, 'grid_threeColumns__ldn5D')]//div[@class='card']",
+    )

@@ -1,30 +1,26 @@
-import pytest
-import os, sys
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from page_main import MainPage
-from page_login import LoginPage
+from selenium.webdriver.support import expected_conditions as EC
+from locators import MainPage
+from locators import LoginPage
+from data import TestData
 
 
-class TestUserLogin:
-    @pytest.mark.positive
-    def test_successful_login(self, driver, wait):
-        main_page = MainPage(driver, wait)
-        login_page = LoginPage(driver, wait)
+class TestLogin:
 
-        main_page.open()
-        main_page.click_entry_button()  # Нажать кнопку «Вход и регистрация».
-        login_page.login_user(
-            "qa_python_25@mail.ru", "qa_python_25"
-        )  # Заполнить все поля формы авторизации и нажать кнопку «Войти».
+    def test_user_login(self, driver, wait):
 
-        assert (
-            main_page.is_user_name_visible()
-        ), "User name is not visible after login"  # Проверка отображения имени пользователя
-        assert (
-            main_page.is_user_avatar_visible()
-        ), "User avatar is not visible after login"  # Проверка отображения аватара
-        assert (
-            main_page.get_current_url()
-            == "https://qa-desk.stand.praktikum-services.ru/login"
-        )  # Проверка перехода на главную страницу
+        driver.find_element(*MainPage.LOGIN_BTN).click()
+        wait.until(EC.visibility_of_element_located(LoginPage.LOGIN_LABEL))
+
+        driver.find_element(*LoginPage.EMAIL_INPUT).send_keys(
+            TestData.user_data()["email"]
+        )
+        driver.find_element(*LoginPage.PASSWORD_INPUT).send_keys(
+            TestData.user_data()["password"]
+        )
+        driver.find_element(*LoginPage.LOGIN_BTN).click()
+
+        avatar_logo = wait.until(EC.visibility_of_element_located(MainPage.AVATAR_LOGO))
+        user_name = wait.until(EC.visibility_of_element_located(MainPage.USER_NAME))
+
+        assert avatar_logo.is_displayed(), "Аватар пользователя не отображается"
+        assert user_name.is_displayed(), "Имя пользователя не отображается"

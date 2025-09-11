@@ -17,3 +17,8 @@ geckodriver.log
 *.tmp
 __pycache__/
 .pytest_cache/
+__pycache__
+.pytest_cache
+.vscode
+env
+.gitignore
